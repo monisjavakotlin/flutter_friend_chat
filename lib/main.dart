@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const String _name = 'Your Name';
+const String _name = 'Monis';
 
 void main() {
   runApp(FriendlychatApp());
@@ -30,7 +30,29 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: AppBar(
         title: Text('FriendlyChat'),
       ),
-      body: _buildTextComposer(),
+      body: Column(
+        children: <Widget>[
+          Flexible(
+            child: ListView.builder(
+              padding: EdgeInsets.all(8.0),
+              reverse: true,
+              itemBuilder: (_, int index) {
+                return _messages[index];
+              },
+              itemCount: _messages.length,
+            ),
+          ),
+          Divider(
+            height: 1.0,
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).cardColor,
+            ),
+            child: _buildTextComposer(),
+          ),
+        ],
+      ),
     );
   }
 
@@ -54,7 +76,7 @@ class _ChatScreenState extends State<ChatScreen> {
               child: IconButton(
                 icon: Icon(Icons.send),
                 onPressed: () {
-                  _handleSubmitted(_textEditingController.text);
+                  return _handleSubmitted(_textEditingController.text);
                 },
               ),
             ),
