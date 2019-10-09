@@ -24,6 +24,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   final List<ChatMessage> _messages = [];
   final TextEditingController _textEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,6 +72,8 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
         margin: EdgeInsets.symmetric(horizontal: 16.0),
         child: Row(
           children: <Widget>[
+            Icon(Icons.message),
+            SizedBox(width: 10.0),
             Flexible(
               child: TextField(
                 controller: _textEditingController,
@@ -80,12 +83,10 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
               ),
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 4.0),
+              margin: EdgeInsets.symmetric(horizontal: 2.0),
               child: IconButton(
                 icon: Icon(Icons.send),
-                onPressed: () {
-                  return _handleSubmitted(_textEditingController.text);
-                },
+                onPressed: () => _handleSubmitted(_textEditingController.text),
               ),
             ),
           ],
@@ -130,20 +131,24 @@ class ChatMessage extends StatelessWidget {
               margin: EdgeInsets.only(right: 16.0),
               child: CircleAvatar(child: Text(_name[0])),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  _name,
-                  style: Theme.of(context).textTheme.subhead,
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 5.0),
-                  child: Text(
-                    text,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    _name,
+                    style: Theme.of(context).textTheme.subhead,
                   ),
-                ),
-              ],
+                  Container(
+                    margin: EdgeInsets.only(top: 5.0, right: 50),
+                    decoration: BoxDecoration(
+                      color: Colors.blue[100],
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: Text(text),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
